@@ -1,2 +1,2 @@
-# Gmail-Batch-Mailer
+# Gmail Batch Mailer
 A Google Apps Script for sending customized batch emails
