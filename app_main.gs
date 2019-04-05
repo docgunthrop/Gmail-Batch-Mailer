@@ -92,8 +92,10 @@ function convertForGmail(r){
 function procStringFunc(s){
 	var tags = s.match(/{{ *\w+ *}}/g);
 	if (!tags){return function(){return s};}
-	tags = tags.map(function(e){return '+x.' + e.slice(2,-2).trim() + '+'});
-	return new Function('x','return ' + s.split(/{{ *\w+ *}}/).map(function(e,i){return '"' + e + '"' + (tags[i] || '')}).join(''));
+	tags = tags.map(function(e){return e.slice(2,-2).trim()});
+	const textShards = s.split(/{{ *\w+ *}}/);
+	return function(x){
+		return textShards.map(function(e,i){return e + (x[tags[i]] || '')}).join('');};
 }
 
 // function gets draft message as a template and returns email object
